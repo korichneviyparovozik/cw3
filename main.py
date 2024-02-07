@@ -60,11 +60,11 @@ class Human:
                 self.to_repair()
                 return
         if manage == "fuel":
-            print("I bought fuel")
+            print("I bought fuel!")
             self.money -= 100
             self.car.fuel += 100
         elif manage == "food":
-            print("I bought food")
+            print("Bought food!")
             self.money -= 50
             self.home.food += 50
         elif manage == "delicacies":
@@ -73,22 +73,53 @@ class Human:
             self.satiety += 2
             self.money -= 5
 
-
     def chill(self):
-        pass
+        if self.money > 150:
+            print("Chilling")
+            self.gladness += 15
+            self.satiety += 5
+            self.money -= 3
+            pass
+        else:
+            if self.car.drive:
+                self.work()
+                return
 
     def clean_home(self):
+        print("Cleaning home")
+        self.gladness = + 5
+        self.satiety -= 3
         pass
 
     def to_repair(self):
-        pass
+        if self.money > 150:
+            print("Repairing a car")
+            self.money -= 100
+            self.gladness += 7
+            self.satiety += 3
+            pass
+        else:
+            print("Not enough money")
 
     def days_indexes(self, day):
         d = f"Today the {day} of {self.name} life"
+        # ===="Today the 1 of Ivan life"====
         print(f"{d:=^50}\n")
         h_i = f"{self.name}'s indexes"
         print(f"{h_i:=^50}\n")
-
+        print(f"Personage cash: {self.money:=^50}\n")
+        print(f"Personage gladness: {self.gladness:=^50}\n")
+        print(f"Personage satiety: {self.satiety:=^50}\n")
+        home_i = "Home indexes"
+        print(f"{home_i:=^50}\n")
+        print(f"Food:{self.home.food:=^50}\n")
+        print(f"Home mess:{self.home.mess:=^50}\n")
+        car_ind = f"{self.car.brand} car indexes"
+        print(f"{car_ind:=^50}\n")
+        print(f"Car brand: {self.car.brand:=^50}\n")
+        print(f"Car fuel: {self.car.fuel:=^50}\n")
+        print(f"Car strength: {self.car.stength:=^50}\n")
+        print(f"Car cons: {self.car.cons:=^50}\n")
 
     def is_alive(self):
         pass
@@ -100,9 +131,9 @@ class Human:
 class Auto:
     def __init__(self, brand_list):
         self.brand = random.choice(list(brand_list))
-        self.fuel = brand_list[self.brand]["fuel"]
-        self.strength = brand_list[self.brand]["strength"]
-        self.cons = brand_list[self.brand]["cons"]
+        self.fuel = brand_list[self.brand]['fuel']
+        self.strength = brand_list[self.brand]['strength']
+        self.cons = brand_list[self.brand]['cons']
 
     def drive(self):
         if self.strength > 0 and self.fuel >= self.cons:
@@ -123,8 +154,8 @@ class House:
 class Job:
     def __init__(self, job_list):
         self.job = random.choice(list(job_list))
-        self.salary = job_list[self.job]["salary"]
-        self.gladness_less = job_list[self.job]["gladness_less"]
+        self.salary = job_list[self.job]['salary']
+        self.gladness_less = job_list[self.job]['gladness_less']
 
 
 job_list = {"Java developer": {"salary": 50, "gladness_less": 10},
@@ -133,6 +164,7 @@ job_list = {"Java developer": {"salary": 50, "gladness_less": 10},
             "Rust developer": {"salary": 70, "gladness_less": 1}, }
 
 brand_of_car = {"BMW": {"fuel": 100, "strength": 100, "cons": 12},
-                "lada": {"fuel": 100, "strength": 20, "cons": 10},
-                "volvo": {"fuel": 80, "strength": 120, "cons": 8},
-                "ferrari": {"fuel": 60, "strength": 80, "cons": 14}, }
+                "Lada": {"fuel": 100, "strength": 20, "cons": 10},
+                "Volvo": {"fuel": 80, "strength": 120, "cons": 8},
+                "Ferrari": {"fuel": 60, "strength": 80, "cons": 14}, }
+
